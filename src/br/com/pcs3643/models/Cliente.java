@@ -20,6 +20,25 @@ public class Cliente {
 	private String email;
 	
 	private String telefone;
+	
+	
+
+	public Cliente() {
+		this.nome = "";
+		CPF = "";
+		this.endereco = "";
+		this.email = "";
+		this.telefone = "";
+	}
+
+	public Cliente(String nome, String cPF, String endereco, String email, String telefone) {
+		super();
+		this.nome = nome;
+		CPF = cPF;
+		this.endereco = endereco;
+		this.email = email;
+		this.telefone = telefone;
+	}
 
 	/** 
 	* @return the nome
