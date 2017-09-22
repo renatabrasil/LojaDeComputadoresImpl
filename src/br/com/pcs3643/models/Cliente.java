@@ -29,6 +29,7 @@ public class Cliente {
 		this.endereco = "";
 		this.email = "";
 		this.telefone = "";
+		
 	}
 
 	public Cliente(String nome, String cPF, String endereco, String email, String telefone) {
