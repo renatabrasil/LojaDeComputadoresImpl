@@ -8,12 +8,19 @@
 <title>Cadastrar cliente</title>
 
 <% Cliente cliente = new Cliente(); %>
-<%= cliente = (Cliente) request.getAttribute("client") %>
+<% cliente = (Cliente) request.getAttribute("client"); %>
 
 </head>
 <body>
 	
 	<h1>Cadastrar cliente</h1>
+	
+	<p>Sistema > Cadastrar Cliente</p>
+	
+	<h3>
+		<a href="<%=request.getContextPath()%>/clients?action=<%= Parameters.CRUD_OPERATIONS.ALL %>">Listar Clientes</a>
+	</h3>
+	
 	<form action="<%=request.getContextPath()%>/clients" method="post">
 		
 		<div>Nome <input type="text" name="nome" value="<%= cliente.getNome() %>"></div>
