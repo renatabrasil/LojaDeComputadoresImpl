@@ -1,6 +1,9 @@
 package br.com.pcs3643.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.pcs3643.config.Parameters;
+import br.com.pcs3643.dao.ClientDAO;
 import br.com.pcs3643.models.Cliente;
 
 /**
@@ -18,8 +22,8 @@ import br.com.pcs3643.models.Cliente;
 public class ClientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private final String index = "/view/clients/index.jsp";
-	private final String form = "/view/clients/form.jsp";
+	private final String index = "/app/views/clients/index.jsp";
+	private final String form = "/app/views/clients/form.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,7 +44,8 @@ public class ClientServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = request.getParameter("action") == null ? "" : ((String) request.getParameter("action"));
-		String page = "/views/index.jsp";
+		String page = "/app/views/index.jsp";
+		
 		switch (action) {
 		case Parameters.CRUD_OPERATIONS.CREATE:
 			Cliente cliente = new Cliente();
@@ -48,6 +53,10 @@ public class ClientServlet extends HttpServlet {
 			request.setAttribute("client", cliente);
 			
 			page = form;
+			break;
+		case Parameters.CRUD_OPERATIONS.ALL:
+			List<Cliente> clientes = new ArrayList<>();
+			
 			break;
 
 		default:
@@ -76,6 +85,16 @@ public class ClientServlet extends HttpServlet {
 		cliente.setEmail(email);
 		cliente.setEndereco(endereco);
 		cliente.setTelefone(telefone);
+		
+		try {
+			ClientDAO clienteDAO = new ClientDAO();
+			clienteDAO.create(cliente);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 

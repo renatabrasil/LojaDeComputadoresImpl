@@ -12,16 +12,10 @@ package br.com.pcs3643.models;
 public class Cliente {
 	
 	private String nome;
-	
 	private String CPF;
-	
 	private String endereco;
-	
 	private String email;
-	
 	private String telefone;
-	
-	
 
 	public Cliente() {
 		this.nome = "";

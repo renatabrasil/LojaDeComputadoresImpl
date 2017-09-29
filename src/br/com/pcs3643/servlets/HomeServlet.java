@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 //		})
 public class HomeServlet extends HttpServlet {
 	
-	private String index = "/view/index.jsp";
+	private String index = "/app/views/index.jsp";
 	
 	private static final long serialVersionUID = 1L;
        
