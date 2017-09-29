@@ -10,7 +10,9 @@ public abstract class GenericDAO {
 	
 //	static final String DATABASE_URL = "jdbc:mysql://localhost/codeblog_java";
 	static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-	static final String DATABASE_URL = "jdbc:mariadb://localhost:3306/loja_de_computadores?user=admin&password=admin";
+	static final String USER = "root";
+	static final String PASSWORD = "admin";
+	static final String DATABASE_URL = "jdbc:mariadb://localhost:3306/loja_de_computadores_db";
     Connection connection = null;
     Statement statement = null; 
     ResultSet resultSet = null; 
@@ -20,7 +22,7 @@ public abstract class GenericDAO {
 		try {
 			Class.forName(JDBC_DRIVER);
 //			con = DriverManager.getConnection(DATABASE_URL, "admin", "admin");
-			con = DriverManager.getConnection(DATABASE_URL);
+			con = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.println("The following error has occured: " + e.getMessage());
