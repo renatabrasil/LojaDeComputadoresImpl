@@ -2,7 +2,10 @@ package br.com.pcs3643.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.pcs3643.models.Cliente;
 
@@ -14,7 +17,7 @@ public class ClientDAO extends GenericDAO
 		this.connection = GenericDAO.getConnection();		
 	}
 	
-	public void create (Cliente cliente) throws SQLException
+	public Cliente create (Cliente cliente) throws SQLException
 	{
 		PreparedStatement pstm = this.connection.prepareStatement("INSERT INTO clientes (nome, cpf, email, endereco, telefone) "
 				+ "values (?, ?, ?, ?, ?)");
@@ -26,5 +29,32 @@ public class ClientDAO extends GenericDAO
 		
 		pstm.executeUpdate();
 		pstm.close();
+		
+		return cliente;
+	}
+	
+	public List<Cliente> getAll () throws SQLException
+	{
+		List<Cliente> clientes = new ArrayList<>();
+		
+		PreparedStatement pstm = this.connection.prepareStatement("SELECT * FROM " + Cliente.class.getSimpleName());
+		
+		ResultSet rs = pstm.executeQuery();
+		
+		while(rs.next()){
+			Cliente cliente = new Cliente();
+			
+			cliente.setId(rs.getLong("id"));
+			cliente.setNome(rs.getString("nome"));
+			cliente.setCPF(rs.getString("cpf"));
+			cliente.setEmail(rs.getString("email"));
+			cliente.setEndereco(rs.getString("endereco"));
+			cliente.setTelefone(rs.getString("telefone"));
+			
+			clientes.add(cliente);
+		}
+		pstm.close();
+		
+		return clientes;
 	}
 }

@@ -24,6 +24,7 @@ public class ClientServlet extends HttpServlet {
 	
 	private final String index = "/app/views/clients/index.jsp";
 	private final String form = "/app/views/clients/form.jsp";
+	private final String list = "/app/views/clients/list.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,22 +47,35 @@ public class ClientServlet extends HttpServlet {
 		String action = request.getParameter("action") == null ? "" : ((String) request.getParameter("action"));
 		String page = "/app/views/index.jsp";
 		
-		switch (action) {
-		case Parameters.CRUD_OPERATIONS.CREATE:
-			Cliente cliente = new Cliente();
+		try {
+			ClientDAO clienteDAO = new ClientDAO();
 			
-			request.setAttribute("client", cliente);
-			
-			page = form;
-			break;
-		case Parameters.CRUD_OPERATIONS.ALL:
-			List<Cliente> clientes = new ArrayList<>();
-			
-			break;
+			switch (action) {
+			case Parameters.CRUD_OPERATIONS.CREATE:
+				Cliente cliente = new Cliente();
+				
+				request.setAttribute("client", cliente);
+				
+				page = form;
+				break;
+			case Parameters.CRUD_OPERATIONS.ALL:
+				List<Cliente> clientes = clienteDAO.getAll();
+				
+				request.setAttribute("clientes", clientes);
+				
+				page = list;
+				
+				break;
 
-		default:
-			break;
+			default:
+				break;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		
 		RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(page);
 		requestDispatcher.forward(request, response);

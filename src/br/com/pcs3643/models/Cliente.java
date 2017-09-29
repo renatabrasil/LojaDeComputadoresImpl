@@ -11,6 +11,7 @@ package br.com.pcs3643.models;
  */
 public class Cliente {
 	
+	private Long id;
 	private String nome;
 	private String CPF;
 	private String endereco;
@@ -24,6 +25,14 @@ public class Cliente {
 		this.email = "";
 		this.telefone = "";
 		
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Cliente(String nome, String cPF, String endereco, String email, String telefone) {
