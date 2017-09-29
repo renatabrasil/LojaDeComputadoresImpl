@@ -23,5 +23,6 @@ hs_err_pid*
 
 .project
 .classpath
+.tern-project
 /bin/*
 
