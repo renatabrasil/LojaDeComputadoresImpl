@@ -3,7 +3,9 @@ package br.com.pcs3643.servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,6 +47,7 @@ public class ClientServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = request.getParameter("action") == null ? "" : ((String) request.getParameter("action"));
+		action = action.isEmpty() && request.getAttribute("action") != null ? (String) request.getAttribute("action") : action;
 		String page = "/app/views/index.jsp";
 		
 		try {
@@ -100,16 +103,54 @@ public class ClientServlet extends HttpServlet {
 		cliente.setEndereco(endereco);
 		cliente.setTelefone(telefone);
 		
-		try {
-			ClientDAO clienteDAO = new ClientDAO();
-			clienteDAO.create(cliente);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Map<String, String> messages = validate(cliente);
+		
+		request.setAttribute("mensagens", messages);
+		request.setAttribute("client", cliente);
+		if (messages.isEmpty())
+		{
+			try {
+				ClientDAO clienteDAO = new ClientDAO();
+				clienteDAO.create(cliente);
+				
+				messages.put("ok", Parameters.VALIDATION_MESSAGES.SUCCESS);
+				
+				request.setAttribute("action", Parameters.CRUD_OPERATIONS.ALL);
+				doGet(request, response);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(form);
+				requestDispatcher.forward(request, response);
+			}
+		} 
+		else
+		{
+			RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(form);
+			requestDispatcher.forward(request, response);
 		}
 		
 		
+		
+	}
+	
+	protected Map<String, String> validate(Cliente cliente)
+	{
+		Map<String, String> messages = new HashMap<String, String>();
+		
+		if (cliente.getCPF().trim().isEmpty())
+			messages.put("CPF", Parameters.VALIDATION_MESSAGES.BLANK_FIELD);
+		if (cliente.getEmail().trim().isEmpty())
+			messages.put("E-mail", Parameters.VALIDATION_MESSAGES.BLANK_FIELD);
+		if (cliente.getEndereco().trim().isEmpty())
+			messages.put("Endereço", Parameters.VALIDATION_MESSAGES.BLANK_FIELD);
+		if (cliente.getNome().trim().isEmpty())
+			messages.put("Nome", Parameters.VALIDATION_MESSAGES.BLANK_FIELD);
+		if (cliente.getTelefone().trim().isEmpty())
+			messages.put("Telefone", Parameters.VALIDATION_MESSAGES.BLANK_FIELD);
+		
+		return messages;
 	}
 
 }

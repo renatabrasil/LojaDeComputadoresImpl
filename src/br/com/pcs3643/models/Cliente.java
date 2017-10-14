@@ -3,6 +3,11 @@ package br.com.pcs3643.models;
  * 
  */
 
+import java.util.HashMap;
+import java.util.Map;
+
+import br.com.pcs3643.config.Parameters;
+
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
@@ -135,5 +140,15 @@ public class Cliente {
 		// begin-user-code
 		this.telefone = telefone;
 		// end-user-code
+	}
+	
+	public boolean validate()
+	{
+		if (this.getCPF().trim().isEmpty() || this.getEmail().trim().isEmpty()
+				|| this.getEndereco().trim().isEmpty() || this.getNome().trim().isEmpty()
+				|| this.getTelefone().trim().isEmpty())
+			return false;
+		
+		return true;
 	}
 }

@@ -19,18 +19,22 @@ public class ClientDAO extends GenericDAO
 	
 	public Cliente create (Cliente cliente) throws SQLException
 	{
-		PreparedStatement pstm = this.connection.prepareStatement("INSERT INTO clientes (nome, cpf, email, endereco, telefone) "
-				+ "values (?, ?, ?, ?, ?)");
-		pstm.setString(1, cliente.getNome());
-		pstm.setString(2, cliente.getCPF());
-		pstm.setString(3, cliente.getEmail());
-		pstm.setString(4, cliente.getEndereco());
-		pstm.setString(5, cliente.getTelefone());
-		
-		pstm.executeUpdate();
-		pstm.close();
+		if (cliente.validate())
+		{
+			PreparedStatement pstm = this.connection.prepareStatement("INSERT INTO cliente (nome, cpf, email, endereco, telefone) "
+					+ "values (?, ?, ?, ?, ?)");
+			pstm.setString(1, cliente.getNome());
+			pstm.setString(2, cliente.getCPF());
+			pstm.setString(3, cliente.getEmail());
+			pstm.setString(4, cliente.getEndereco());
+			pstm.setString(5, cliente.getTelefone());
+			
+			pstm.executeUpdate();
+			pstm.close();
+		}
 		
 		return cliente;
+		
 	}
 	
 	public List<Cliente> getAll () throws SQLException

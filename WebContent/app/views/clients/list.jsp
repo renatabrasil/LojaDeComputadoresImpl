@@ -47,17 +47,25 @@
 			<div class="col-lg-10">
 				<br/><br/><br/><br/>
 				<h1>Clientes cadastrados</h1>
-
-				<table>
+				<a class="btn btn-primary" href="<%=request.getContextPath()%>/clients?action=<%=Parameters.CRUD_OPERATIONS.CREATE%>">Cadastrar cliente</a>
+				<table class="table">
 					<tr>
 						<th>#</th>
 						<th>Nome</th>
+						<th style="text-align: right;">CPF</th>
+						<th>E-mail</th>
+						<th>Endereço</th>
+						<th></th>
 					</tr>
 					<tbody>
 						<% for (Cliente cliente : clientes) { %>
 						<tr>
 							<td></td>
 							<td><%= cliente.getNome() %></td>
+							<td style="text-align: right;"><%= cliente.getCPF() %></td>
+							<td><%= cliente.getEmail() %></td>
+							<td><%= cliente.getEndereco() %></td>
+							<td style="text-align: center;">Detalhes | Editar | Excluir</td>
 						</tr>
 						<% } %>
 					</tbody>

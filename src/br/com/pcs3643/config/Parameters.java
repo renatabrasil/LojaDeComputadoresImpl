@@ -9,5 +9,10 @@ public interface Parameters {
 		public final static String READ = "read";
 		public final static String DELETE = "delete";
 	}
+	
+	public interface VALIDATION_MESSAGES {
+		public final static String BLANK_FIELD = "não informado(a).";
+		public final static String SUCCESS = "Operação realizada com sucesso.";
+	}
 
 }

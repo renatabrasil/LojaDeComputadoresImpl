@@ -8,7 +8,6 @@ import java.sql.Statement;
 
 public abstract class GenericDAO {
 	
-//	static final String DATABASE_URL = "jdbc:mysql://localhost/codeblog_java";
 	static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
 	static final String USER = "root";
 	static final String PASSWORD = "admin";
@@ -21,7 +20,6 @@ public abstract class GenericDAO {
 		Connection con = null;
 		try {
 			Class.forName(JDBC_DRIVER);
-//			con = DriverManager.getConnection(DATABASE_URL, "admin", "admin");
 			con = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

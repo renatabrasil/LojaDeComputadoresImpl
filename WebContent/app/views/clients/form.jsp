@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page
-	import="br.com.pcs3643.config.Parameters, br.com.pcs3643.models.Cliente"%>
+	import="br.com.pcs3643.config.Parameters, br.com.pcs3643.models.Cliente, java.util.HashMap, java.util.List, java.util.Map"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,6 +17,7 @@
 
 <% Cliente cliente = new Cliente(); %>
 <% cliente = (Cliente) request.getAttribute("client"); %>
+<% Map<String, String> mensagens = (HashMap<String, String>) request.getAttribute("mensagens"); %>
 
 </head>
 <body>
@@ -50,6 +51,21 @@
 			
 			<div class="col-lg-8">
 				<br/><br/><br/><br/>
+				
+				
+				<% if (mensagens != null && !mensagens.isEmpty()) { %>
+					<h3>Erros encontrados:</h3>
+					<ul>
+					<% for (Map.Entry<String, String> entry : mensagens.entrySet()) { %>
+						<% String chave = entry.getKey();  %>
+						<% String valor = entry.getValue();  %>
+						<li>		
+						<%= chave %>: <%= valor %>
+						</li>
+					<% } %>
+					</ul>
+				<% } %>
+				
 				<h1>Cadastrar cliente</h1>
 	
 				<p>Sistema > Cadastrar Cliente</p>
@@ -88,6 +104,7 @@
 		</div>
 	</div>
 
+	
 
 
 	<script
