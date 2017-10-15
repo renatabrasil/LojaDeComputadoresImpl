@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page
 	import="br.com.pcs3643.config.Parameters, br.com.pcs3643.models.Cliente, java.util.HashMap, java.util.List, java.util.Map"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,11 +14,6 @@
 	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
 	crossorigin="anonymous">
 
-
-
-<% Cliente cliente = new Cliente(); %>
-<% cliente = (Cliente) request.getAttribute("client"); %>
-<% Map<String, String> mensagens = (HashMap<String, String>) request.getAttribute("mensagens"); %>
 
 </head>
 <body>
@@ -52,50 +48,44 @@
 			<div class="col-lg-8">
 				<br/><br/><br/><br/>
 				
-				
-				<% if (mensagens != null && !mensagens.isEmpty()) { %>
-					<h3>Erros encontrados:</h3>
-					<ul>
-					<% for (Map.Entry<String, String> entry : mensagens.entrySet()) { %>
-						<% String chave = entry.getKey();  %>
-						<% String valor = entry.getValue();  %>
-						<li>		
-						<%= chave %>: <%= valor %>
-						</li>
-					<% } %>
-					</ul>
-				<% } %>
-				
 				<h1>Cadastrar cliente</h1>
 	
 				<p>Sistema > Cadastrar Cliente</p>
+				
+				<c:if test="${mensagens != null && not empty mensagens }">
+					<h3>Erros encontrados:</h3>
+					<ul>
+						<c:forEach var="mensagem" items="${mensagens}">
+						    <li>${mensagem.key} : ${mensagem.value} </li>
+						</c:forEach>
+					</ul>
+				</c:if>
 	
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/clients?action=<%= Parameters.CRUD_OPERATIONS.ALL %>">Listar
+						href="${pageContext.request.contextPath}/clients?action=<%= Parameters.CRUD_OPERATIONS.ALL %>">Listar
 						Clientes</a>
 				</h4>
 	
-				<form action="<%=request.getContextPath()%>/clients" method="post">
-	
+				<form action="${pageContext.request.contextPath}/clients" method="post">
 					<div>
 						Nome <input type="text" name="nome"
-							value="<%= cliente.getNome() %>">
+							value="${client.nome }">
 					</div>
 					<div>
-						CPF: <input type="text" name="cpf">
+						CPF: <input type="text" name="cpf" value="${client.CPF}">
 					</div>
 					<div>
-						Endereço: <input type="text" name="endereco">
+						Endereço: <input type="text" name="endereco" value="${client.endereco}">
 					</div>
 					<div>
-						E-mail: <input type="text" name="email">
+						E-mail: <input type="text" name="email" value="${client.email}">
 					</div>
 					<div>
-						Telefone: <input type="text" name="telefone">
+						Telefone: <input type="text" name="telefone" value="${client.telefone}">
 					</div>
 	
-					<button value="Cadastrar" type="submit">Cadastrar</button>
+					<button value="Cadastrar" type="submit" class="btn btn-primary">Cadastrar</button>
 				</form>
 			
 			</div>

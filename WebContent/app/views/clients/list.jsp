@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page
 	import="br.com.pcs3643.config.Parameters, br.com.pcs3643.models.Cliente, java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,7 +14,6 @@
 	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
 	crossorigin="anonymous">
 
-<% List<Cliente> clientes = (List<Cliente>) request.getAttribute("clientes"); %>
 </head>
 <body>
 
@@ -47,7 +47,16 @@
 			<div class="col-lg-10">
 				<br/><br/><br/><br/>
 				<h1>Clientes cadastrados</h1>
-				<a class="btn btn-primary" href="<%=request.getContextPath()%>/clients?action=<%=Parameters.CRUD_OPERATIONS.CREATE%>">Cadastrar cliente</a>
+				
+				<c:if test="${mensagens != null && not empty mensagens }">
+					<ul>
+						<c:forEach var="mensagem" items="${mensagens}">
+						    <li>${mensagem.value} </li>
+						</c:forEach>
+					</ul>
+				</c:if>
+				
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/clients?action=<%=Parameters.CRUD_OPERATIONS.CREATE%>">Cadastrar cliente</a>
 				<table class="table">
 					<tr>
 						<th>#</th>
@@ -58,16 +67,17 @@
 						<th></th>
 					</tr>
 					<tbody>
-						<% for (Cliente cliente : clientes) { %>
-						<tr>
-							<td></td>
-							<td><%= cliente.getNome() %></td>
-							<td style="text-align: right;"><%= cliente.getCPF() %></td>
-							<td><%= cliente.getEmail() %></td>
-							<td><%= cliente.getEndereco() %></td>
-							<td style="text-align: center;">Detalhes | Editar | Excluir</td>
-						</tr>
-						<% } %>
+						<c:forEach var="cliente" items="${clientes}" varStatus="id">
+							<tr>
+								<td>${id.count}</td>
+								<td>${cliente.nome}</td>
+								<td style="text-align: right;">${cliente.CPF}</td>
+								<td>${cliente.email}</td>
+								<td>${cliente.endereco}</td>
+								<td style="text-align: center;">Detalhes | Editar | Excluir</td>
+							</tr>
+						</c:forEach>
+
 					</tbody>
 				</table>
 

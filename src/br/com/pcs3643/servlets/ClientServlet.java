@@ -113,7 +113,7 @@ public class ClientServlet extends HttpServlet {
 				ClientDAO clienteDAO = new ClientDAO();
 				clienteDAO.create(cliente);
 				
-				messages.put("ok", Parameters.VALIDATION_MESSAGES.SUCCESS);
+				messages.put("mensagens", Parameters.VALIDATION_MESSAGES.SUCCESS);
 				
 				request.setAttribute("action", Parameters.CRUD_OPERATIONS.ALL);
 				doGet(request, response);
