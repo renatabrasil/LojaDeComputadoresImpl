@@ -10,6 +10,9 @@
     <property name="source" value="1.8"/>
     <path id="Server Library [Apache Tomcat v8.5] (unbound).libraryclasspath"/>
     <path id="Web App Libraries.libraryclasspath">
+        <pathelement location="WebContent/WEB-INF/lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jstl-1.2.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/junit-4.12.jar"/>
         <pathelement location="WebContent/WEB-INF/lib/mariadb-java-client-2.1.1.jar"/>
         <pathelement location="WebContent/WEB-INF/lib/mysql-connector-java-5.1.44-bin.jar"/>
     </path>
@@ -47,6 +50,9 @@
         <path refid="EAR Libraries.libraryclasspath"/>
         <path refid="Apache Tomcat v8.0 [Apache Tomcat v8.0].libraryclasspath"/>
         <pathelement location="WebContent/WEB-INF/lib/mysql-connector-java-5.1.44-bin.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/junit-4.12.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/jstl-1.2.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/hamcrest-core-1.3.jar"/>
     </path>
     <target name="init">
         <mkdir dir="WebContent/WEB-INF/classes"/>
