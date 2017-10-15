@@ -9,5 +9,5 @@ package br.com.pcs3643.models;
  * @author adm2
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class PenteDeMemoria extends Peça {
+public class PenteDeMemoria extends Peca {
 }
