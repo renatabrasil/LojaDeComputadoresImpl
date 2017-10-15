@@ -61,11 +61,6 @@
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
-        <copy includeemptydirs="false" todir="WebContent/WEB-INF/classes">
-            <fileset dir=".apt_generated">
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
     </target>
     <target name="clean">
         <delete dir="WebContent/WEB-INF/classes"/>
@@ -77,7 +72,6 @@
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="WebContent/WEB-INF/classes" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
-            <src path=".apt_generated"/>
             <classpath refid="LojaDeComputadoresImpl.classpath"/>
         </javac>
     </target>

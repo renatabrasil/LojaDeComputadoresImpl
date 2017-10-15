@@ -3,7 +3,7 @@ jdk:
   - oraclejdk8
   - openjdk7
 
-script: ant init
+script: ant build
 
 # install: true
 
