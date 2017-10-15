@@ -18,7 +18,7 @@ public class Computador {
 	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	private Set<Peca> peça;
+	private Set<Peca> peca;
 
 	/** 
 	* @return the peça
@@ -26,7 +26,7 @@ public class Computador {
 	*/
 	public Set<Peca> getPeça() {
 		// begin-user-code
-		return peça;
+		return peca;
 		// end-user-code
 	}
 
@@ -36,7 +36,7 @@ public class Computador {
 	*/
 	public void setPeça(Set<Peca> peça) {
 		// begin-user-code
-		this.peça = peça;
+		this.peca = peça;
 		// end-user-code
 	}
 
