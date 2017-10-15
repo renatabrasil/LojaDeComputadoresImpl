@@ -37,6 +37,33 @@ public class ClientDAO extends GenericDAO
 		
 	}
 	
+	
+	public Cliente read(int id) throws SQLException
+	{
+		Cliente cliente = new Cliente();
+		
+		PreparedStatement pstm = this.connection.prepareStatement("SELECT * FROM " + Cliente.class.getSimpleName()
+				+ " WHERE id = ?");
+		
+		pstm.setInt(1, id);
+		
+		ResultSet rs = pstm.executeQuery();
+		
+		
+		while(rs.next()){
+			
+			cliente.setId(rs.getLong("id"));
+			cliente.setNome(rs.getString("nome"));
+			cliente.setCPF(rs.getString("cpf"));
+			cliente.setEmail(rs.getString("email"));
+			cliente.setEndereco(rs.getString("endereco"));
+			cliente.setTelefone(rs.getString("telefone"));
+		}
+		pstm.close();
+		
+		return cliente;
+	}
+	
 	public List<Cliente> getAll () throws SQLException
 	{
 		List<Cliente> clientes = new ArrayList<>();

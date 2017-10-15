@@ -53,12 +53,15 @@
 				<p>Sistema > Cadastrar Cliente</p>
 				
 				<c:if test="${mensagens != null && not empty mensagens }">
-					<h3>Erros encontrados:</h3>
-					<ul>
-						<c:forEach var="mensagem" items="${mensagens}">
-						    <li>${mensagem.key} : ${mensagem.value} </li>
-						</c:forEach>
-					</ul>
+					<div class="alert alert-info alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h5>Erro(s) encontrado(s):</h5>
+						<ul>
+							<c:forEach var="mensagem" items="${mensagens}">
+							    <li>${mensagem.key} : ${mensagem.value} </li>
+							</c:forEach>
+						</ul>
+					</div>
 				</c:if>
 	
 				<h4>
@@ -70,19 +73,19 @@
 				<form action="${pageContext.request.contextPath}/clients" method="post">
 					<div>
 						Nome <input type="text" name="nome"
-							value="${client.nome }">
+							value="${cliente.nome }">
 					</div>
 					<div>
-						CPF: <input type="text" name="cpf" value="${client.CPF}">
+						CPF: <input type="text" name="cpf" value="${cliente.CPF}">
 					</div>
 					<div>
-						Endereço: <input type="text" name="endereco" value="${client.endereco}">
+						Endereço: <input type="text" name="endereco" value="${cliente.endereco}">
 					</div>
 					<div>
-						E-mail: <input type="text" name="email" value="${client.email}">
+						E-mail: <input type="text" name="email" value="${cliente.email}">
 					</div>
 					<div>
-						Telefone: <input type="text" name="telefone" value="${client.telefone}">
+						Telefone: <input type="text" name="telefone" value="${cliente.telefone}">
 					</div>
 	
 					<button value="Cadastrar" type="submit" class="btn btn-primary">Cadastrar</button>
@@ -94,9 +97,12 @@
 		</div>
 	</div>
 
-	
 
 
+	<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
 		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"

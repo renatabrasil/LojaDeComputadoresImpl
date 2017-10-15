@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Clientes cadastrados</title>
+<title>Loja de Computadores</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -46,7 +46,7 @@
 
 			<div class="col-lg-10">
 				<br/><br/><br/><br/>
-				<h1>Clientes cadastrados</h1>
+				<h1>Detalhes do cliente</h1>
 				
 				<c:if test="${mensagens != null && not empty mensagens }">
 					<div class="alert alert-info alert-dismissible" role="alert">
@@ -59,33 +59,20 @@
 					</div>
 				</c:if>
 				
-				<a class="btn btn-primary" href="${pageContext.request.contextPath}/clients?action=<%=Parameters.CRUD_OPERATIONS.CREATE%>">Cadastrar cliente</a>
-				<table class="table">
-					<tr>
-						<th>#</th>
-						<th>Nome</th>
-						<th style="text-align: right;">CPF</th>
-						<th>E-mail</th>
-						<th>Endereço</th>
-						<th></th>
-					</tr>
-					<tbody>
-						<c:forEach var="cliente" items="${clientes}" varStatus="id">
-							<tr>
-								<td>${id.count}</td>
-								<td>${cliente.nome}</td>
-								<td style="text-align: right;">${cliente.CPF}</td>
-								<td>${cliente.email}</td>
-								<td>${cliente.endereco}</td>
-								<td style="text-align: center;">
-									<a href="${pageContext.request.contextPath}/clients?action=<%=Parameters.CRUD_OPERATIONS.READ%>&id=${cliente.id}">Detalhes</a>
-									 | Editar | Excluir
-								</td>
-							</tr>
-						</c:forEach>
-
-					</tbody>
-				</table>
+				<div class="card card-outline-secondary my-4">
+            <div class="card-header">
+              Informações
+            </div>
+            <div class="card-body">
+              <p><strong>Nome:</strong> ${cliente.nome }</p>
+              <p><strong>CPF:</strong> ${cliente.CPF }</p>
+              <p><strong>E-mail:</strong> ${cliente.email }</p>
+              <p><strong>Endereço:</strong> ${cliente.endereco }</p>
+              <p><strong>Telefone:</strong> ${cliente.telefone }</p>
+              <hr>
+              <a href="#" class="btn">Voltar</a>
+            </div>
+          </div>
 
 			</div>
 

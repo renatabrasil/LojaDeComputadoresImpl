@@ -27,6 +27,9 @@ public class ClientServlet extends HttpServlet {
 	private final String index = "/app/views/clients/index.jsp";
 	private final String form = "/app/views/clients/form.jsp";
 	private final String list = "/app/views/clients/list.jsp";
+	private final String show = "/app/views/clients/show.jsp";
+	
+	private int id;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -50,6 +53,8 @@ public class ClientServlet extends HttpServlet {
 		action = action.isEmpty() && request.getAttribute("action") != null ? (String) request.getAttribute("action") : action;
 		String page = "/app/views/index.jsp";
 		
+		id = request.getParameter("id") == null ? 0 : Integer.parseInt(request.getParameter("id")); 
+		
 		try {
 			ClientDAO clienteDAO = new ClientDAO();
 			
@@ -57,7 +62,7 @@ public class ClientServlet extends HttpServlet {
 			case Parameters.CRUD_OPERATIONS.CREATE:
 				Cliente cliente = new Cliente();
 				
-				request.setAttribute("client", cliente);
+				request.setAttribute("cliente", cliente);
 				
 				page = form;
 				break;
@@ -69,7 +74,14 @@ public class ClientServlet extends HttpServlet {
 				page = list;
 				
 				break;
-
+			case Parameters.CRUD_OPERATIONS.READ:
+				cliente = clienteDAO.read(id);
+				request.setAttribute("cliente", cliente);
+				
+				page = show;
+				
+				break;
+				
 			default:
 				break;
 			}
@@ -113,7 +125,7 @@ public class ClientServlet extends HttpServlet {
 				ClientDAO clienteDAO = new ClientDAO();
 				clienteDAO.create(cliente);
 				
-				messages.put("mensagens", Parameters.VALIDATION_MESSAGES.SUCCESS);
+				messages.put(HttpServletResponse.SC_OK+"", Parameters.VALIDATION_MESSAGES.SUCCESS);
 				
 				request.setAttribute("action", Parameters.CRUD_OPERATIONS.ALL);
 				doGet(request, response);
