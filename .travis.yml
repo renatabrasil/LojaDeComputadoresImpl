@@ -1,7 +1,7 @@
 language: java
 jdk: oraclejdk8
 
-script: ant build
+script: ant build -Dfile.encoding=UTF-8
 
 # install: true
 
