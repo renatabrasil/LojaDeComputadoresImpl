@@ -21,22 +21,22 @@ public class Computador {
 	private Set<Peca> peca;
 
 	/** 
-	* @return the peça
+	* @return the pecaa
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public Set<Peca> getPeça() {
+	public Set<Peca> getPeca() {
 		// begin-user-code
 		return peca;
 		// end-user-code
 	}
 
 	/** 
-	* @param peça the peça to set
+	* @param peca the peca to set
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void setPeça(Set<Peca> peça) {
+	public void setPeca(Set<Peca> peca) {
 		// begin-user-code
-		this.peca = peça;
+		this.peca = peca;
 		// end-user-code
 	}
 

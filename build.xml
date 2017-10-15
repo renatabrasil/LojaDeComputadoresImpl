@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- WARNING: Eclipse auto-generated file.
+<?xml version="1.0" encoding="iso-8859-1"?><!-- WARNING: Eclipse auto-generated file.
               Any modifications will be overwritten.
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
@@ -58,6 +58,7 @@
         <mkdir dir="WebContent/WEB-INF/classes"/>
         <copy includeemptydirs="false" todir="WebContent/WEB-INF/classes">
             <fileset dir="src">
+                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>

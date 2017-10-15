@@ -21,7 +21,7 @@ public class ItemDoPedido {
 	private Set<Peca> peca;
 
 	/** 
-	* @return the peça
+	* @return the peca
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public Set<Peca> getPeca() {
@@ -31,7 +31,7 @@ public class ItemDoPedido {
 	}
 
 	/** 
-	* @param peca the peça to set
+	* @param peca the peca to set
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public void setPeca(Set<Peca> peca) {
