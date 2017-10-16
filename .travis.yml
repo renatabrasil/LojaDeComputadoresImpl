@@ -1,7 +1,10 @@
 language: java
 jdk: oraclejdk8
+script:
+ - mvn test
+ - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
-script: ant build -Dfile.encoding=iso-8859-1
+# script: ant build -Dfile.encoding=iso-8859-1
 
 # install: true
 
