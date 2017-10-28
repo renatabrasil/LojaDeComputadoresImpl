@@ -1,1 +1,1 @@
-web: sh target
+web: sh target/m2e-wtp/web-resources
