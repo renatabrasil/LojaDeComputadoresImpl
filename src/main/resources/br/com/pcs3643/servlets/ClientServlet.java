@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.pcs3643.config.Parameters;
-import br.com.pcs3643.dao.ClientDAO;
+import br.com.pcs3643.dao.ClientDAO2;
 import br.com.pcs3643.models.Cliente;
 
 /**
@@ -55,7 +55,7 @@ public class ClientServlet extends HttpServlet {
 		id = request.getParameter("id") == null ? 0 : Integer.parseInt(request.getParameter("id")); 
 		
 		try {
-			ClientDAO clienteDAO = new ClientDAO();
+			ClientDAO2 clienteDAO = new ClientDAO2();
 			
 			switch (action) {
 			case Parameters.CRUD_OPERATIONS.CREATE:
@@ -121,7 +121,7 @@ public class ClientServlet extends HttpServlet {
 		if (messages.isEmpty())
 		{
 			try {
-				ClientDAO clienteDAO = new ClientDAO();
+				ClientDAO2 clienteDAO = new ClientDAO2();
 				clienteDAO.create(cliente);
 				
 				messages.put(HttpServletResponse.SC_OK+"", Parameters.VALIDATION_MESSAGES.SUCCESS);

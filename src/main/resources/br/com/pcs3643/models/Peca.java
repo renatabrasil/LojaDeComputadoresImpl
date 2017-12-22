@@ -8,19 +8,34 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 /** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
 * @author adm2
 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 */
 public class Peca {
+	
+	private int id;
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private String nome;
-
+	
+	private String tipoPeca;
+	
+	private String descricao;
+	
+	/** 
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	private BigDecimal preco;
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
 	/** 
 	* @return the nome
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
@@ -40,13 +55,6 @@ public class Peca {
 		this.nome = nome;
 		// end-user-code
 	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private BigDecimal preco;
 
 	/** 
 	* @return the preco
@@ -120,5 +128,21 @@ public class Peca {
 		// begin-user-code
 		this.itemDoPedido = itemDoPedido;
 		// end-user-code
+	}
+	
+	public void setTipoPeca(String tipoPeca) {
+		this.tipoPeca = tipoPeca;
+	}
+	
+	public String getTipoPeca() {
+		return tipoPeca;
+	}
+	
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	public String getDescricao() {
+		return descricao;
 	}
 }

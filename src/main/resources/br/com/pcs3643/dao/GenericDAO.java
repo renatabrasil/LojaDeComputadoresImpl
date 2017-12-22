@@ -9,6 +9,7 @@ import java.sql.Statement;
 public abstract class GenericDAO {
 	
 	static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
+//	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String USER = "root";
 	static final String PASSWORD = "admin";
 	static final String DATABASE_URL = "jdbc:mariadb://localhost:3306/loja_de_computadores_db";
@@ -17,19 +18,18 @@ public abstract class GenericDAO {
     ResultSet resultSet = null; 
 	
 	public static Connection getConnection() {
-		Connection con = null;
+		Connection connection = null;
 		try {
 			Class.forName(JDBC_DRIVER);
-			con = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
+			connection = DriverManager.getConnection(
+					DATABASE_URL, 
+					USER, PASSWORD);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("The following error has occured: " + e.getMessage());
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return con;
+		return connection;
 	}
 	
 	public void DisconnectFromDB() {

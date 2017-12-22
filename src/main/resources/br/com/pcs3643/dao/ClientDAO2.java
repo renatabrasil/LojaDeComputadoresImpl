@@ -1,20 +1,22 @@
 package br.com.pcs3643.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.pcs3643.models.Cliente;
 
-public class ClientDAO extends GenericDAO 
+public class ClientDAO2 extends GenericDAO
 {
 	private Connection connection;
 	
-	public ClientDAO() throws SQLException {
-		this.connection = GenericDAO.getConnection();		
+	public ClientDAO2() throws SQLException {
+		this.connection = getConnection();		
 	}
 	
 	public Cliente create (Cliente cliente) throws SQLException
@@ -42,10 +44,9 @@ public class ClientDAO extends GenericDAO
 	{
 		Cliente cliente = new Cliente();
 		
-		PreparedStatement pstm = this.connection.prepareStatement("SELECT * FROM " + Cliente.class.getSimpleName()
-				+ " WHERE id = ?");
+		Connection connection = getConnection();
 		
-		pstm.setInt(1, id);
+		PreparedStatement pstm = connection.prepareStatement("SELECT * FROM clientes ");
 		
 		ResultSet rs = pstm.executeQuery();
 		
