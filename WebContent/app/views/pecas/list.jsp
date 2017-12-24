@@ -44,7 +44,7 @@
 
 		<div class="row">
 
-			<div class="col-lg-10">
+			<div class="col-lg-11">
 				<br/><br/><br/><br/>
 				<h1>Peças cadastradas</h1>
 				

@@ -46,7 +46,7 @@
 
 			<div class="col-lg-10">
 				<br/><br/><br/><br/>
-				<h1>Detalhes do cliente</h1>
+				<h1>Detalhes da peça</h1>
 				
 				<c:if test="${mensagens != null && not empty mensagens }">
 					<div class="alert alert-info alert-dismissible" role="alert">
@@ -64,11 +64,10 @@
               Informações
             </div>
             <div class="card-body">
-              <p><strong>Nome:</strong> ${cliente.nome }</p>
-              <p><strong>CPF:</strong> ${cliente.CPF }</p>
-              <p><strong>E-mail:</strong> ${cliente.email }</p>
-              <p><strong>Endereço:</strong> ${cliente.endereco }</p>
-              <p><strong>Telefone:</strong> ${cliente.telefone }</p>
+              <p><strong>Nome:</strong> ${peca.nome }</p>
+              <p><strong>Tipo:</strong> ${peca.tipoPeca }</p>
+              <p><strong>Descrição:</strong> ${peca.descricao}</p>
+              <p><strong>Preço:</strong> ${peca.preco }</p>
               <hr>
               <a href="#" class="btn">Voltar</a>
             </div>

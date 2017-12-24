@@ -43,6 +43,29 @@ public class PecaDAO {
 		return false;
 	}
 	
+	public Peca findByPrimaryKey(int id) throws SQLException {
+		Statement statement = null;
+		
+		statement = connection.createStatement();
+		
+		ResultSet resultSet = statement.executeQuery("SELECT * FROM peca WHERE id = " + id);
+		
+		Peca peca = null;
+		
+		if (resultSet.next())
+		{
+			peca = new Peca();
+			
+			peca.setId(resultSet.getInt("id"));
+			peca.setDescricao(resultSet.getString("descricao"));
+			peca.setNome(resultSet.getString("nome"));
+			peca.setPreco(resultSet.getBigDecimal("preco"));
+			peca.setTipoPeca(resultSet.getString("tipo_peca"));
+		}
+		
+		return peca;
+	}
+	
 	public List<Peca> getAll() throws SQLException {
 		Statement statement = null;
 		List<Peca> pecas = new ArrayList<Peca>();

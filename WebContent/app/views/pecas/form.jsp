@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page
-	import="br.com.pcs3643.config.Parameters, br.com.pcs3643.models.Cliente, java.util.HashMap, java.util.List, java.util.Map"%>
+	import="br.com.pcs3643.config.Parameters, br.com.pcs3643.models.Peca, java.util.HashMap, java.util.List, java.util.Map"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastrar cliente</title>
+<title>Cadastrar peça</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -48,9 +48,9 @@
 			<div class="col-lg-8">
 				<br/><br/><br/><br/>
 				
-				<h1>Cadastrar cliente</h1>
+				<h1>Cadastrar peça</h1>
 	
-				<p>Sistema > Cadastrar Cliente</p>
+				<p>Sistema > Cadastrar Peça</p>
 				
 				<c:if test="${mensagens != null && not empty mensagens }">
 					<div class="alert alert-info alert-dismissible" role="alert">
@@ -66,26 +66,23 @@
 	
 				<h4>
 					<a
-						href="${pageContext.request.contextPath}/clients?action=<%= Parameters.CRUD_OPERATIONS.ALL %>">Listar
+						href="${pageContext.request.contextPath}/pecas?action=<%= Parameters.CRUD_OPERATIONS.ALL %>">Listar
 						Clientes</a>
 				</h4>
 	
-				<form action="${pageContext.request.contextPath}/clients" method="post">
+				<form action="${pageContext.request.contextPath}/pecas" method="post">
 					<div>
 						Nome <input type="text" name="nome"
-							value="${cliente.nome }">
+							value="${peca.nome }">
 					</div>
 					<div>
-						CPF: <input type="text" name="cpf" value="${cliente.CPF}">
+						Descrição: <input type="text" name="descricao" value="${peca.descricao}">
 					</div>
 					<div>
-						Endereço: <input type="text" name="endereco" value="${cliente.endereco}">
+						Tipo: <input type="text" name="tipo_peca" value="${peca.tipoPeca}">
 					</div>
 					<div>
-						E-mail: <input type="text" name="email" value="${cliente.email}">
-					</div>
-					<div>
-						Telefone: <input type="text" name="telefone" value="${cliente.telefone}">
+						Preço: <input type="text" name="preco" value="${peca.preco}">
 					</div>
 	
 					<button value="Cadastrar" type="submit" class="btn btn-primary">Cadastrar</button>

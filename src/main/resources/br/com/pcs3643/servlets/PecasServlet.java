@@ -1,8 +1,11 @@
 package br.com.pcs3643.servlets;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -68,8 +71,8 @@ public class PecasServlet extends HttpServlet {
 				
 				break;
 			case Parameters.CRUD_OPERATIONS.READ:
-//				peca = clienteDAO.read(id);
-//				request.setAttribute("cliente", cliente);
+				peca = pecaDAO.findByPrimaryKey(id);
+				request.setAttribute("peca", peca);
 				
 				page = show;
 				
@@ -92,8 +95,60 @@ public class PecasServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		Peca peca = new Peca();
+		
+		BigDecimal preco = request.getParameter("preco") == null ? new BigDecimal (0) : new BigDecimal((String) request.getParameter("preco"));
+		
+		peca.setNome(request.getParameter("nome"));
+		peca.setTipoPeca(request.getParameter("tipo_peca"));
+		peca.setDescricao(request.getParameter("descricao"));
+		peca.setPreco(preco);
+		
+		Map<String, String> messages = validate(peca);
+		
+		request.setAttribute("mensagens", messages);
+		request.setAttribute("peca", peca);
+		
+		if (messages.isEmpty())
+		{
+			try {
+				PecaDAO pecaDAO = new PecaDAO();
+				pecaDAO.create(peca);
+				
+				messages.put(HttpServletResponse.SC_OK+"", Parameters.VALIDATION_MESSAGES.SUCCESS);
+				
+				request.setAttribute("action", Parameters.CRUD_OPERATIONS.ALL);
+				doGet(request, response);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(form);
+				requestDispatcher.forward(request, response);
+			}
+		} 
+		else
+		{
+			RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(form);
+			requestDispatcher.forward(request, response);
+		}
+	}
+	
+	
+	protected Map<String, String> validate(Peca peca)
+	{
+		Map<String, String> messages = new HashMap<String, String>();
+		
+		if (peca.getNome().trim().isEmpty())
+			messages.put("Nome", Parameters.VALIDATION_MESSAGES.BLANK_FIELD);
+		if (peca.getDescricao().trim().isEmpty())
+			messages.put("Descrição", Parameters.VALIDATION_MESSAGES.BLANK_FIELD);
+		if (peca.getTipoPeca().trim().isEmpty())
+			messages.put("Tipo", Parameters.VALIDATION_MESSAGES.BLANK_FIELD);
+		if (peca.getPreco() == null)
+			messages.put("Preço", Parameters.VALIDATION_MESSAGES.BLANK_FIELD);
+		
+		return messages;
 	}
 
 }
