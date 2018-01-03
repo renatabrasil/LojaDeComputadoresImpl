@@ -16,6 +16,15 @@ public class Usuario {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private String login;
+	
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	private String senha;
+	
+	private Vendedor vendedor;
 
 	/** 
 	* @return the login
@@ -38,13 +47,6 @@ public class Usuario {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private String senha;
-
-	/** 
 	* @return the senha
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
@@ -62,5 +64,13 @@ public class Usuario {
 		// begin-user-code
 		this.senha = senha;
 		// end-user-code
+	}
+	
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+	
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 }

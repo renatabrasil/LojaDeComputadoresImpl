@@ -20,6 +20,22 @@ public class Pedido {
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	private BigDecimal precoTotal;
+	
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	private Integer quantidade;
+	
+	/** 
+	* <!-- begin-UML-doc -->
+	* <!-- end-UML-doc -->
+	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+	*/
+	private Set<ItemDoPedido> itemDoPedido;
+	
+	private Vendedor vendedor;
 
 	/** 
 	* @return the precoTotal
@@ -41,12 +57,6 @@ public class Pedido {
 		// end-user-code
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Integer quantidade;
 
 	/** 
 	* @return the quantidade
@@ -69,13 +79,6 @@ public class Pedido {
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<ItemDoPedido> itemDoPedido;
-
-	/** 
 	* @return the itemDoPedido
 	* @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
@@ -93,5 +96,13 @@ public class Pedido {
 		// begin-user-code
 		this.itemDoPedido = itemDoPedido;
 		// end-user-code
+	}
+	
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+	
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 }

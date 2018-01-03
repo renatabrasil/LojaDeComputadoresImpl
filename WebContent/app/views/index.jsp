@@ -57,7 +57,9 @@
 						Clientes</a></li>
 					<li><a
 						href="<%=request.getContextPath()%>/pecas?action=<%= Parameters.CRUD_OPERATIONS.ALL %>">Peças</a></li>
-					<li>Realizar pedido</li>
+					<li>
+						<a
+						href="<%=request.getContextPath()%>/pedidos?action=<%= Parameters.CRUD_OPERATIONS.ALL %>">Realizar pedido</a></li>
 					<li>Gerar Relatório de vendas</li>
 				</ul>
 			</div>
