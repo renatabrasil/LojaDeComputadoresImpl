@@ -50,6 +50,8 @@
 				<h1></h1>
 				<br/><br/><br/><br/>
 				<ul>
+					<li><a href="<%=request.getContextPath()%>/vendedores?action=<%=Parameters.CRUD_OPERATIONS.CREATE%>">Cadastrar
+							vendedor</a></li>
 					<li><a href="<%=request.getContextPath()%>/clients?action=<%=Parameters.CRUD_OPERATIONS.CREATE%>">Cadastrar
 							cliente</a></li>
 					<li><a

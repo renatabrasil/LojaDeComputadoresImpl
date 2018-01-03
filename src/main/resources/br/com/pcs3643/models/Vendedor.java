@@ -17,6 +17,7 @@ public class Vendedor {
 	private String telefone;
 	private String login;
 	private String senha;
+	private String senhaConfirmacao;
 	
 	public Vendedor()
 	{
@@ -66,5 +67,12 @@ public class Vendedor {
 		this.senha = senha;
 	}
 	
+	public String getSenhaConfirmacao() {
+		return senhaConfirmacao;
+	}
+	
+	public void setSenhaConfirmacao(String senhaConfirmacao) {
+		this.senhaConfirmacao = senhaConfirmacao;
+	}
 	
 }
