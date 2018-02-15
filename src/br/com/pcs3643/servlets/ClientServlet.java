@@ -23,13 +23,11 @@ import br.com.pcs3643.models.Cliente;
 public class ClientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private final String index = "/app/views/clients/index.jsp";
-	private final String form = "/app/views/clients/form.jsp";
-	private final String list = "/app/views/clients/list.jsp";
-	private final String show = "/app/views/clients/show.jsp";
+	private final static String FORM = "/app/views/clients/form.jsp";
+	private final static String LIST = "/app/views/clients/list.jsp";
+	private final static String SHOW = "/app/views/clients/show.jsp";
+	private final static String MAIN_PARAMETER = "action";
 	
-	private int id;
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,22 +35,18 @@ public class ClientServlet extends HttpServlet {
         
     }
     
-    @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	// TODO Auto-generated method stub
-    	super.service(request, response);
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String action = request.getParameter("action") == null ? "" : ((String) request.getParameter("action"));
-		action = action.isEmpty() && request.getAttribute("action") != null ? (String) request.getAttribute("action") : action;
+		String action = request.getParameter(MAIN_PARAMETER) == null ? "" : ((String) request.getParameter(MAIN_PARAMETER));
+		action = action.isEmpty() && request.getAttribute(MAIN_PARAMETER) != null ? (String) request.getAttribute(MAIN_PARAMETER) : action;
 		String page = "/app/views/index.jsp";
 		
-		id = request.getParameter("id") == null ? 0 : Integer.parseInt(request.getParameter("id")); 
+		int id = request.getParameter("id") == null ? 0 : Integer.parseInt(request.getParameter("id")); 
 		
 		try {
 			ClientDAO clienteDAO = new ClientDAO();
@@ -63,21 +57,21 @@ public class ClientServlet extends HttpServlet {
 				
 				request.setAttribute("cliente", cliente);
 				
-				page = form;
+				page = FORM;
 				break;
 			case Parameters.CRUD_OPERATIONS.ALL:
 				List<Cliente> clientes = clienteDAO.getAll();
 				
 				request.setAttribute("clientes", clientes);
 				
-				page = list;
+				page = LIST;
 				
 				break;
 			case Parameters.CRUD_OPERATIONS.READ:
 				cliente = clienteDAO.read(id);
 				request.setAttribute("cliente", cliente);
 				
-				page = show;
+				page = SHOW;
 				
 				break;
 				
@@ -98,6 +92,7 @@ public class ClientServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
@@ -126,19 +121,19 @@ public class ClientServlet extends HttpServlet {
 				
 				messages.put(HttpServletResponse.SC_OK+"", Parameters.VALIDATION_MESSAGES.SUCCESS);
 				
-				request.setAttribute("action", Parameters.CRUD_OPERATIONS.ALL);
+				request.setAttribute(MAIN_PARAMETER, Parameters.CRUD_OPERATIONS.ALL);
 				doGet(request, response);
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(form);
+				RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(FORM);
 				requestDispatcher.forward(request, response);
 			}
 		} 
 		else
 		{
-			RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(form);
+			RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(FORM);
 			requestDispatcher.forward(request, response);
 		}
 		
@@ -148,7 +143,7 @@ public class ClientServlet extends HttpServlet {
 	
 	protected Map<String, String> validate(Cliente cliente)
 	{
-		Map<String, String> messages = new HashMap<String, String>();
+		Map<String, String> messages = new HashMap<>();
 		
 		if (cliente.getCPF().trim().isEmpty())
 			messages.put("CPF", Parameters.VALIDATION_MESSAGES.BLANK_FIELD);

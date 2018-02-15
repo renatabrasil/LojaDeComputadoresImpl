@@ -21,16 +21,19 @@ public class ClientDAO extends GenericDAO
 	{
 		if (cliente.validate())
 		{
-			PreparedStatement pstm = this.connection.prepareStatement("INSERT INTO cliente (nome, cpf, email, endereco, telefone) "
-					+ "values (?, ?, ?, ?, ?)");
-			pstm.setString(1, cliente.getNome());
-			pstm.setString(2, cliente.getCPF());
-			pstm.setString(3, cliente.getEmail());
-			pstm.setString(4, cliente.getEndereco());
-			pstm.setString(5, cliente.getTelefone());
 			
-			pstm.executeUpdate();
-			pstm.close();
+			try (PreparedStatement pstm = this.connection.prepareStatement("INSERT INTO cliente (nome, cpf, email, endereco, telefone) "
+					+ "values (?, ?, ?, ?, ?)"))
+			{
+				pstm.setString(1, cliente.getNome());
+				pstm.setString(2, cliente.getCPF());
+				pstm.setString(3, cliente.getEmail());
+				pstm.setString(4, cliente.getEndereco());
+				pstm.setString(5, cliente.getTelefone());
+				
+				pstm.executeUpdate();
+			}
+			
 		}
 		
 		return cliente;
@@ -42,24 +45,25 @@ public class ClientDAO extends GenericDAO
 	{
 		Cliente cliente = new Cliente();
 		
-		PreparedStatement pstm = this.connection.prepareStatement("SELECT * FROM " + Cliente.class.getSimpleName()
+		try (
+				PreparedStatement pstm = this.connection.prepareStatement("SELECT * FROM " + Cliente.class.getSimpleName()
 				+ " WHERE id = ?");
-		
-		pstm.setInt(1, id);
-		
-		ResultSet rs = pstm.executeQuery();
-		
-		
-		while(rs.next()){
+				ResultSet rs = pstm.executeQuery()
+			)
+		{
+			pstm.setInt(1, id);
 			
-			cliente.setId(rs.getLong("id"));
-			cliente.setNome(rs.getString("nome"));
-			cliente.setCPF(rs.getString("cpf"));
-			cliente.setEmail(rs.getString("email"));
-			cliente.setEndereco(rs.getString("endereco"));
-			cliente.setTelefone(rs.getString("telefone"));
+			
+			while(rs.next()){
+				
+				cliente.setId(rs.getLong("id"));
+				cliente.setNome(rs.getString("nome"));
+				cliente.setCPF(rs.getString("cpf"));
+				cliente.setEmail(rs.getString("email"));
+				cliente.setEndereco(rs.getString("endereco"));
+				cliente.setTelefone(rs.getString("telefone"));
+			}
 		}
-		pstm.close();
 		
 		return cliente;
 	}
@@ -68,23 +72,24 @@ public class ClientDAO extends GenericDAO
 	{
 		List<Cliente> clientes = new ArrayList<>();
 		
-		PreparedStatement pstm = this.connection.prepareStatement("SELECT * FROM " + Cliente.class.getSimpleName());
-		
-		ResultSet rs = pstm.executeQuery();
-		
-		while(rs.next()){
-			Cliente cliente = new Cliente();
-			
-			cliente.setId(rs.getLong("id"));
-			cliente.setNome(rs.getString("nome"));
-			cliente.setCPF(rs.getString("cpf"));
-			cliente.setEmail(rs.getString("email"));
-			cliente.setEndereco(rs.getString("endereco"));
-			cliente.setTelefone(rs.getString("telefone"));
-			
-			clientes.add(cliente);
+		try (
+				PreparedStatement pstm = this.connection.prepareStatement("SELECT * FROM " + Cliente.class.getSimpleName());
+				ResultSet rs = pstm.executeQuery()
+			)
+		{
+			while(rs.next()){
+				Cliente cliente = new Cliente();
+				
+				cliente.setId(rs.getLong("id"));
+				cliente.setNome(rs.getString("nome"));
+				cliente.setCPF(rs.getString("cpf"));
+				cliente.setEmail(rs.getString("email"));
+				cliente.setEndereco(rs.getString("endereco"));
+				cliente.setTelefone(rs.getString("telefone"));
+				
+				clientes.add(cliente);
+			}
 		}
-		pstm.close();
 		
 		return clientes;
 	}
