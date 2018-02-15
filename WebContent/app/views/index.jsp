@@ -8,6 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Página Inicial</title>
 
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath }/app/images/p2/favicon.ico">
+<link rel="manifest" href="${pageContext.request.contextPath }/app/images/p2/manifest.json">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
@@ -48,12 +50,18 @@
 				<h1></h1>
 				<br/><br/><br/><br/>
 				<ul>
+					<li><a href="<%=request.getContextPath()%>/vendedores?action=<%=Parameters.CRUD_OPERATIONS.CREATE%>">Cadastrar
+							vendedor</a></li>
 					<li><a href="<%=request.getContextPath()%>/clients?action=<%=Parameters.CRUD_OPERATIONS.CREATE%>">Cadastrar
 							cliente</a></li>
 					<li><a
 						href="<%=request.getContextPath()%>/clients?action=<%= Parameters.CRUD_OPERATIONS.ALL %>">Listar
 						Clientes</a></li>
-					<li>Realizar pedido</li>
+					<li><a
+						href="<%=request.getContextPath()%>/pecas?action=<%= Parameters.CRUD_OPERATIONS.ALL %>">Peças</a></li>
+					<li>
+						<a
+						href="<%=request.getContextPath()%>/pedidos?action=<%= Parameters.CRUD_OPERATIONS.ALL %>">Realizar pedido</a></li>
 					<li>Gerar Relatório de vendas</li>
 				</ul>
 			</div>
