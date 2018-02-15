@@ -74,8 +74,8 @@ public class ClientServlet extends HttpServlet {
 				
 				break;
 			case Parameters.CRUD_OPERATIONS.READ:
-				cliente = clienteDAO.read(id);
-				request.setAttribute("cliente", cliente);
+//				cliente = clienteDAO.read(id);
+//				request.setAttribute("cliente", cliente);
 				
 				page = show;
 				
